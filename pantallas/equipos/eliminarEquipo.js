@@ -11,7 +11,7 @@ async function eliminarEquipo(datos) {
     if (datos.equipos.length === 0) return;
     console.log('  (0 para cancelar)');
     const id = parseInt(await preguntar('  ID a eliminar'), 10);
-    if (id === 0) return;
+    if (id === 0) { console.log('\n  Cancelado.'); await esperarEnter(); return; }
     const ok = await dbEliminar(datos, id);
     console.log(ok ? '\n  Equipo eliminado.' : '\n  Equipo no encontrado.');
     await esperarEnter();

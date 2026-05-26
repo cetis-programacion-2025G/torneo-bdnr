@@ -1,7 +1,7 @@
 const { obtenerEquipos }                                  = require('../../db/equipos/obtenerEquipos');
 const { insertarPartido }                                 = require('../../db/partidos/insertarPartido');
 const { dibujarTabla, titulo: tituloUI, limpiarPantalla } = require('../../utils/ui');
-const { pedirEntero }                                     = require('../../utils/input');
+const { pedirEntero, esperarEnter }                        = require('../../utils/input');
 
 async function programarPartido(datos) {
     limpiarPantalla();
@@ -10,6 +10,7 @@ async function programarPartido(datos) {
     const equipos = await obtenerEquipos(datos);
     if (equipos.length < 2) {
         console.log('\n  Se necesitan al menos 2 equipos.');
+        await esperarEnter();
         return;
     }
     dibujarTabla(equipos, [
@@ -22,8 +23,14 @@ async function programarPartido(datos) {
     if (id_local === 0) return;
     const id_visitante = await pedirEntero('  ID Equipo Visitante', [...ids, 0]);
     if (id_visitante === 0) return;
+    if (id_local === id_visitante) {
+        console.log('\n  Un equipo no puede jugar contra si mismo.');
+        await esperarEnter();
+        return;
+    }
     const nuevo        = await insertarPartido(datos, { id_local, id_visitante });
     console.log(`\n  Partido programado con ID ${nuevo.id}.`);
+    await esperarEnter();
 }
 
 module.exports = { programarPartido };

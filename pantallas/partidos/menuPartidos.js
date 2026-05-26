@@ -10,17 +10,17 @@ async function menuPartidos(datos) {
         limpiarPantalla();
         console.log('');
         titulo('PARTIDOS', 67);
+        await listarPartidos(datos);
+        console.log('');
         console.log('─'.repeat(69));
-        console.log('  1. Ver partidos');
-        console.log('  2. Programar partido');
-        console.log('  3. Capturar resultado');
+        console.log('  1. Programar partido');
+        console.log('  2. Registrar resultado');
         console.log('  0. Volver');
         console.log('─'.repeat(69));
-        const op = await pedirEntero('Opcion', [0, 1, 2, 3]);
+        const op = await pedirEntero('Opcion', [0, 1, 2]);
         switch (op) {
-            case 1: await listarPartidos(datos);    await esperarEnter(); break;
-            case 2: await programarPartido(datos);  await esperarEnter(); break;
-            case 3: await capturarResultado(datos); await esperarEnter(); break;
+            case 1: await programarPartido(datos);  break;
+            case 2: await capturarResultado(datos); break;
             case 0: salir = true; break;
         }
     }

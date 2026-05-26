@@ -11,19 +11,19 @@ async function menuEquipos(datos) {
         limpiarPantalla();
         console.log('');
         titulo('EQUIPOS', 52);
+        await listarEquipos(datos);
+        console.log('');
         console.log('─'.repeat(54));
-        console.log('  1. Ver equipos');
-        console.log('  2. Agregar equipo');
-        console.log('  3. Editar equipo');
-        console.log('  4. Eliminar equipo');
+        console.log('  1. Agregar equipo');
+        console.log('  2. Editar equipo');
+        console.log('  3. Eliminar equipo');
         console.log('  0. Volver');
         console.log('─'.repeat(54));
-        const op = await pedirEntero('Opcion', [0, 1, 2, 3, 4]);
+        const op = await pedirEntero('Opcion', [0, 1, 2, 3]);
         switch (op) {
-            case 1: await listarEquipos(datos);  await esperarEnter(); break;
-            case 2: await agregarEquipo(datos);  await esperarEnter(); break;
-            case 3: await editarEquipo(datos);   await esperarEnter(); break;
-            case 4: await eliminarEquipo(datos); await esperarEnter(); break;
+            case 1: await agregarEquipo(datos);  break;
+            case 2: await editarEquipo(datos);   break;
+            case 3: await eliminarEquipo(datos); break;
             case 0: salir = true; break;
         }
     }

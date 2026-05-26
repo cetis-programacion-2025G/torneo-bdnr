@@ -1,7 +1,7 @@
 const { obtenerPartidos }                                 = require('../../db/partidos/obtenerPartidos');
 const { registrarResultado }                              = require('../../db/partidos/registrarResultado');
 const { dibujarTabla, titulo: tituloUI, limpiarPantalla } = require('../../utils/ui');
-const { pedirEntero }                                     = require('../../utils/input');
+const { pedirEntero, esperarEnter }                        = require('../../utils/input');
 
 async function capturarResultado(datos) {
     limpiarPantalla();
@@ -10,6 +10,7 @@ async function capturarResultado(datos) {
     const pendientes = (await obtenerPartidos(datos)).filter(p => !p.jugado);
     if (pendientes.length === 0) {
         console.log('\n  No hay partidos pendientes.');
+        await esperarEnter();
         return;
     }
     dibujarTabla(pendientes, [
@@ -25,6 +26,7 @@ async function capturarResultado(datos) {
     const golesVisitante = await pedirEntero('  Goles Visitante', [0,1,2,3,4,5,6,7,8,9,10]);
     await registrarResultado(datos, id, golesLocal, golesVisitante);
     console.log('\n  Resultado registrado.');
+    await esperarEnter();
 }
 
 module.exports = { capturarResultado };
