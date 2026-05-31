@@ -26,7 +26,7 @@ async function main() {
             case 0: salir = true; break;
         }
     }
-    // TODO: await cliente.close();
+    await cliente.close();
     console.log('\nHasta luego.\n');
 }
 
