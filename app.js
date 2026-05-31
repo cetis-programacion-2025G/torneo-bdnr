@@ -3,10 +3,11 @@ const { limpiarPantalla, titulo } = require('./utils/ui');
 const { pedirEntero }      = require('./utils/input');
 const { menuEquipos }      = require('./pantallas/equipos/menuEquipos');
 const { menuPartidos }     = require('./pantallas/partidos/menuPartidos');
-// TODO: const { conectar } = require('./conexion');
+const { conectar } = require('./conexion');
 
 async function main() {
-    // TODO: const { cliente, db } = await conectar();
+    const { cliente, db } = await conectar();
+
     const datos = datosIniciales();
     let salir = false;
     while (!salir) {
