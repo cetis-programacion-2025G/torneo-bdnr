@@ -5,13 +5,13 @@ const { agregarEquipo }  = require('./agregarEquipo');
 const { editarEquipo }   = require('./editarEquipo');
 const { eliminarEquipo } = require('./eliminarEquipo');
 
-async function menuEquipos(datos) {
+async function menuEquipos(datos, db) {
     let salir = false;
     while (!salir) {
         limpiarPantalla();
         console.log('');
         titulo('EQUIPOS', 52);
-        await listarEquipos(datos);
+        await listarEquipos(datos, db);
         console.log('');
         console.log('─'.repeat(54));
         console.log('  1. Agregar equipo');

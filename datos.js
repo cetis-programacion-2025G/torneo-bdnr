@@ -3,11 +3,11 @@
 function datosIniciales() {
     return {
         equipos: [
-            { id: 1, nombre: 'Los Toros',   ciudad: 'Guadalajara'      },
-            { id: 2, nombre: 'Los Tigres',  ciudad: 'Monterrey'        },
-            { id: 3, nombre: 'Las Aguilas', ciudad: 'Ciudad de Mexico' },
-            { id: 4, nombre: 'Los Rayados', ciudad: 'Monterrey'        },
-            { id: 5, nombre: 'Las Chivas',  ciudad: 'Guadalajara'      },
+            { id: 1, nombre: 'Los Toros X',   ciudad: 'Guadalajara'      },
+            { id: 2, nombre: 'Los Tigres x',  ciudad: 'Monterrey'        },
+            { id: 3, nombre: 'Las Aguilas x', ciudad: 'Ciudad de Mexico' },
+            { id: 4, nombre: 'Los Rayados x', ciudad: 'Monterrey'        },
+            { id: 5, nombre: 'Las Chivas x',  ciudad: 'Guadalajara'      },
         ],
         partidos: [
             { id: 1, id_local: 1, id_visitante: 2, goles_local: 2, goles_visitante: 1, jugado: true  },

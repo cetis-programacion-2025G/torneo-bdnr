@@ -1,10 +1,10 @@
 const { obtenerEquipos }        = require('../../db/equipos/obtenerEquipos');
 const { dibujarTabla, titulo }  = require('../../utils/ui');
 
-async function listarEquipos(datos) {
-    const filas = await obtenerEquipos(datos);
+async function listarEquipos(datos, db) {
+    const filas = await obtenerEquipos(db);
     const columnas = [
-        { titulo: 'ID',     clave: 'id',     ancho: 4  },
+        { titulo: 'ID',     clave: '_id',  ancho: 40  },
         { titulo: 'Nombre', clave: 'nombre', ancho: 20 },
         { titulo: 'Ciudad', clave: 'ciudad', ancho: 20 },
     ];

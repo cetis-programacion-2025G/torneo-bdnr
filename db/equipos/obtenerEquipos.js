@@ -1,6 +1,5 @@
-// TODO (MongoDB): db.collection('equipos').find().sort({ nombre: 1 }).toArray()
-async function obtenerEquipos(datos) {
-    return datos.equipos;
+async function obtenerEquipos(db) {
+    return await db.collection('equipos').find().toArray();
 }
 
 module.exports = { obtenerEquipos };
