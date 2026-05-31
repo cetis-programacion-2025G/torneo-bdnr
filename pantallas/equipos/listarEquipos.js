@@ -4,7 +4,7 @@ const { dibujarTabla, titulo }  = require('../../utils/ui');
 async function listarEquipos(datos, db) {
     const filas = await obtenerEquipos(db);
     const columnas = [
-        { titulo: 'ID',     clave: '_id',  ancho: 40  },
+        { titulo: '#',     clave: 'posicion',  ancho: 4  },
         { titulo: 'Nombre', clave: 'nombre', ancho: 20 },
         { titulo: 'Ciudad', clave: 'ciudad', ancho: 20 },
     ];
