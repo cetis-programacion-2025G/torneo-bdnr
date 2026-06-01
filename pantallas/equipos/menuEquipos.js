@@ -5,7 +5,7 @@ const { agregarEquipo }  = require('./agregarEquipo');
 const { editarEquipo }   = require('./editarEquipo');
 const { eliminarEquipo } = require('./eliminarEquipo');
 
-async function menuEquipos(datos, db) {
+async function menuEquipos(db) {
     let salir = false;
     while (!salir) {
         limpiarPantalla();
@@ -23,7 +23,7 @@ async function menuEquipos(datos, db) {
         switch (op) {
             case 1: await agregarEquipo(db);  break;
             case 2: await editarEquipo(db);   break;
-            case 3: await eliminarEquipo(datos); break;
+            case 3: await eliminarEquipo(db); break;
             case 0: salir = true; break;
         }
     }
