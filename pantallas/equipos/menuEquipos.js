@@ -22,7 +22,7 @@ async function menuEquipos(datos, db) {
         const op = await pedirEntero('Opcion', [0, 1, 2, 3]);
         switch (op) {
             case 1: await agregarEquipo(db);  break;
-            case 2: await editarEquipo(datos);   break;
+            case 2: await editarEquipo(db);   break;
             case 3: await eliminarEquipo(datos); break;
             case 0: salir = true; break;
         }

@@ -11,6 +11,8 @@ async function listarEquipos(db) {
     console.log('');
     titulo('LISTA DE EQUIPOS', 52);
     dibujarTabla(filas, columnas);
+
+    return filas;
 }
 
 module.exports = { listarEquipos };

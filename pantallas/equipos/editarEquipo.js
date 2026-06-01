@@ -4,22 +4,40 @@ const { listarEquipos }                      = require('./listarEquipos');
 const { preguntar, esperarEnter }            = require('../../utils/input');
 const { titulo: tituloUI, limpiarPantalla }  = require('../../utils/ui');
 
-async function editarEquipo(datos) {
+async function editarEquipo(db) {
     limpiarPantalla();
     console.log('');
     tituloUI('EDITAR EQUIPO', 52);
-    await listarEquipos(datos);
-    if (datos.equipos.length === 0) return;
+
+    const equipos = await listarEquipos(db);
+
+    if (equipos.length === 0) return;
+
     console.log('  (0 para cancelar)');
-    const id = parseInt(await preguntar('  ID a editar'), 10);
-    if (id === 0) { console.log('\n  Cancelado.'); await esperarEnter(); return; }
-    const e  = await buscarEquipo(datos, id);
-    if (!e) { console.log('\n  Equipo no encontrado.'); await esperarEnter(); return; }
+    const posicion = parseInt(await preguntar('  Escribe el # (numero de fila) a editar: '), 10);
+    
+    if (posicion === 0) {
+        console.log('\n  Cancelado.'); 
+        await esperarEnter(); 
+        return; 
+    }
+
+    const e  = await buscarEquipo(equipos, posicion);
+    
+    if (e == null) { 
+        console.log('\n  Equipo no encontrado.'); 
+        await esperarEnter(); 
+        return; 
+    }
+
     console.log('\n  (Enter para conservar el valor actual)\n');
     const nombre = (await preguntar(`  Nombre [${e.nombre}]: `)) || e.nombre;
     const ciudad = (await preguntar(`  Ciudad [${e.ciudad}]: `)) || e.ciudad;
-    await actualizarEquipo(datos, id, { nombre, ciudad });
+
+    await actualizarEquipo(db, e._id, { nombre, ciudad });
+
     console.log('\n  Equipo actualizado.');
+
     await esperarEnter();
 }
 
