@@ -22,7 +22,7 @@ async function main() {
         const op = await pedirEntero('Opcion', [0, 1, 2]);
         switch (op) {
             case 1: await menuEquipos(db);  break;
-            case 2: await menuPartidos(datos); break;
+            case 2: await menuPartidos(datos, db); break;
             case 0: salir = true; break;
         }
     }

@@ -1,23 +1,47 @@
-async function obtenerPartidos(datos) {
-    const resultado = [];
-    for (let i = 0; i < datos.partidos.length; i++) {
-        const partido = datos.partidos[i];
-        let local = null;
-        let visitante = null;
-        for (let j = 0; j < datos.equipos.length; j++) {
-            if (datos.equipos[j].id === partido.id_local)     local     = datos.equipos[j];
-            if (datos.equipos[j].id === partido.id_visitante) visitante = datos.equipos[j];
+async function obtenerPartidos(datos, db) {
+    const partidos = await db.collection('partidos').aggregate([
+        {
+            $lookup: {
+                from: 'equipos',
+                localField: 'id_local',
+                foreignField: '_id',
+                as: 'equipo_local'
+            }
+        }, {
+            $lookup: {
+                from: 'equipos',
+                localField: 'id_visitante',
+                foreignField: '_id',
+                as: 'equipo_visitante'
+            }
+        }, 
+        {
+            $unwind: '$equipo_local'
+        },  {
+            $unwind: '$equipo_visitante'
+        }, {
+            $project:  {
+                _id: 1,
+                goles_local: 1,
+                goles_visitante: 1,
+                jugado: 1,
+                local: '$equipo_local.nombre',
+                visitante: '$equipo_visitante.nombre'
+            }
+        },
+        {
+            $setWindowFields: {
+            sortBy: { _id: 1 },
+            output: {
+                index: {
+                    $documentNumber: {}
+                }
+            }
         }
-        resultado.push({
-            id:              partido.id,
-            local:           local     ? local.nombre     : '(desconocido)',
-            visitante:       visitante ? visitante.nombre : '(desconocido)',
-            goles_local:     partido.goles_local,
-            goles_visitante: partido.goles_visitante,
-            jugado:          partido.jugado,
-        });
-    }
-    return resultado;
+    },
+    ]).toArray();
+
+    return partidos;
 }
 
 module.exports = { obtenerPartidos };

@@ -4,13 +4,13 @@ const { listarPartidos }    = require('./listarPartidos');
 const { programarPartido }  = require('./programarPartido');
 const { capturarResultado } = require('./capturarResultado');
 
-async function menuPartidos(datos) {
+async function menuPartidos(datos, db) {
     let salir = false;
     while (!salir) {
         limpiarPantalla();
         console.log('');
         titulo('PARTIDOS', 67);
-        await listarPartidos(datos);
+        await listarPartidos(datos, db);
         console.log('');
         console.log('─'.repeat(69));
         console.log('  1. Programar partido');
