@@ -1,7 +1,7 @@
 const { obtenerEquipos }        = require('../../db/equipos/obtenerEquipos');
 const { dibujarTabla, titulo }  = require('../../utils/ui');
 
-async function listarEquipos(datos, db) {
+async function listarEquipos(db) {
     const filas = await obtenerEquipos(db);
     const columnas = [
         { titulo: '#',     clave: 'posicion',  ancho: 4  },

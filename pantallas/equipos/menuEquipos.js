@@ -11,7 +11,7 @@ async function menuEquipos(datos, db) {
         limpiarPantalla();
         console.log('');
         titulo('EQUIPOS', 52);
-        await listarEquipos(datos, db);
+        await listarEquipos(db);
         console.log('');
         console.log('─'.repeat(54));
         console.log('  1. Agregar equipo');
@@ -21,7 +21,7 @@ async function menuEquipos(datos, db) {
         console.log('─'.repeat(54));
         const op = await pedirEntero('Opcion', [0, 1, 2, 3]);
         switch (op) {
-            case 1: await agregarEquipo(datos);  break;
+            case 1: await agregarEquipo(db);  break;
             case 2: await editarEquipo(datos);   break;
             case 3: await eliminarEquipo(datos); break;
             case 0: salir = true; break;

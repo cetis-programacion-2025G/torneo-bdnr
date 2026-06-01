@@ -2,7 +2,7 @@ const { insertarEquipo }                    = require('../../db/equipos/insertar
 const { preguntar, esperarEnter }           = require('../../utils/input');
 const { titulo: tituloUI, limpiarPantalla } = require('../../utils/ui');
 
-async function agregarEquipo(datos) {
+async function agregarEquipo(db) {
     limpiarPantalla();
     console.log('');
     tituloUI('AGREGAR EQUIPO');
@@ -11,8 +11,8 @@ async function agregarEquipo(datos) {
     if (nombre === '0') { console.log('\n  Cancelado.'); return; }
     const ciudad = await preguntar('  Ciudad');
     if (ciudad === '0') { console.log('\n  Cancelado.'); return; }
-    const nuevo  = await insertarEquipo(datos, { nombre, ciudad });
-    console.log(`\n  Equipo "${nuevo.nombre}" agregado con ID ${nuevo.id}.`);
+    const nuevo  = await insertarEquipo(db, { nombre, ciudad });
+    console.log(`\n  Equipo "${nombre}" fue agregado `);
     await esperarEnter();
 }
 
