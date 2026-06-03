@@ -19,7 +19,7 @@ async function menuPartidos(datos, db) {
         console.log('─'.repeat(69));
         const op = await pedirEntero('Opcion', [0, 1, 2]);
         switch (op) {
-            case 1: await programarPartido(datos);  break;
+            case 1: await programarPartido(db);  break;
             case 2: await capturarResultado(datos); break;
             case 0: salir = true; break;
         }
