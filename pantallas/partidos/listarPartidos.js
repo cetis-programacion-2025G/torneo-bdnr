@@ -1,8 +1,8 @@
 const { obtenerPartidos }       = require('../../db/partidos/obtenerPartidos');
 const { dibujarTabla, titulo }  = require('../../utils/ui');
 
-async function listarPartidos(datos, db) {
-    const filas = await obtenerPartidos(datos, db);
+async function listarPartidos(db) {
+    const filas = await obtenerPartidos(db);
     const columnas = [
         { titulo: 'ID',        clave: 'index',              ancho: 4  },
         { titulo: 'Local',     clave: 'local',           ancho: 16 },

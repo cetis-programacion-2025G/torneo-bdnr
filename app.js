@@ -1,4 +1,3 @@
-const { datosIniciales }   = require('./datos');
 const { limpiarPantalla, titulo } = require('./utils/ui');
 const { pedirEntero }      = require('./utils/input');
 const { menuEquipos }      = require('./pantallas/equipos/menuEquipos');
@@ -8,7 +7,6 @@ const { conectar } = require('./conexion');
 async function main() {
     const { cliente, db } = await conectar();
 
-    const datos = datosIniciales();
     let salir = false;
     while (!salir) {
         limpiarPantalla();
@@ -22,7 +20,7 @@ async function main() {
         const op = await pedirEntero('Opcion', [0, 1, 2]);
         switch (op) {
             case 1: await menuEquipos(db);  break;
-            case 2: await menuPartidos(datos, db); break;
+            case 2: await menuPartidos(db); break;
             case 0: salir = true; break;
         }
     }

@@ -4,13 +4,13 @@ const { listarPartidos }    = require('./listarPartidos');
 const { programarPartido }  = require('./programarPartido');
 const { capturarResultado } = require('./capturarResultado');
 
-async function menuPartidos(datos, db) {
+async function menuPartidos(db) {
     let salir = false;
     while (!salir) {
         limpiarPantalla();
         console.log('');
         titulo('PARTIDOS', 67);
-        await listarPartidos(datos, db);
+        await listarPartidos(db);
         console.log('');
         console.log('─'.repeat(69));
         console.log('  1. Programar partido');
@@ -20,7 +20,7 @@ async function menuPartidos(datos, db) {
         const op = await pedirEntero('Opcion', [0, 1, 2]);
         switch (op) {
             case 1: await programarPartido(db);  break;
-            case 2: await capturarResultado(datos); break;
+            case 2: await capturarResultado(db); break;
             case 0: salir = true; break;
         }
     }

@@ -1,5 +1,10 @@
-async function obtenerPartidos(db) {
+async function obtenerPartidosJugados(db) {
     const partidos = await db.collection('partidos').aggregate([
+        {
+            $match: {
+                jugado: false
+            }
+        },
         {
             $lookup: {
                 from: 'equipos',
@@ -44,4 +49,4 @@ async function obtenerPartidos(db) {
     return partidos;
 }
 
-module.exports = { obtenerPartidos };
+module.exports = { obtenerPartidosJugados };
